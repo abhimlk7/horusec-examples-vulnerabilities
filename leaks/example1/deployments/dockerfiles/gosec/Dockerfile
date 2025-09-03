@@ -16,5 +16,11 @@ FROM securego/gosec:latest
 
 RUN apk --no-cache add ca-certificates openssh-client jq
 
+# Create non-root user and group
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+# Switch to non-root user
+USER appuser
+
 ENTRYPOINT []
 CMD ["/bin/sh"]
